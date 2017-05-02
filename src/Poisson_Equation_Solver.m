@@ -76,3 +76,5 @@ xlabel('X domain','fontSize',12);
 ylabel('Y domain','fontSize',12);
 zlabel('u(x,y)')
 title('Numerical Solution to Poisson Equation','fontsize',12);
+
+%Luis Espinoza

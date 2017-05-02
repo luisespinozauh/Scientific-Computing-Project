@@ -37,6 +37,8 @@ F=sin(x/(2*pi))'*cos((y+pi)/2);      % Forcing function, optimization- instead o
 
 %% Iterative Looping- Gauss-Seidel Method
 
+tic;        % Timer to evaluate Performance
+
 while max(err(:)) > tol
     iter= iter + 1;
     
@@ -53,7 +55,9 @@ while max(err(:)) > tol
     
 end
 
-fprintf('Number of iterations is :%f',iter)
+timedoc=toc;
+fprintf('Number of iterations is %f.\n',iter)
+fprintf('Running Time is %f seconds.\n',timedoc)
 
 %% Plot the results
 

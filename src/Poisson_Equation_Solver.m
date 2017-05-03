@@ -13,7 +13,7 @@ a_y=0;
 b_x= (2*pi);  
 b_y= (2*pi);
 
-N=10;    % Number of Grid Points, change for grid convergence study  
+N=100;    % Number of Grid Points, change for grid convergence study  
 Nx=N;    % Number of nodes in x-direction
 Ny=N;    % Number of nodes in y-direction
 tol=1e-06;    % Tolerance
@@ -68,7 +68,7 @@ while max(err(:)) > tol
     % If you want to test the restart script, use the function pause(1) to slow down the while loop.
     % This will slow down the while loop to 1 sec per iteration so that ctrl + C can used be to
     % "kill" the code to simulate a computer crash. From there, use the restart script to restart the loop.  
-    pause(1)
+    
     if mod(iter, frequency) == 0 % If statement, checkpoints periodically (determined by the frequency)
         chkpt                    % chkpt script performs checkpointing (save) every *frequency* iterations
         fprintf(1, ['Checkpointing frequency is every %2d iterations.' ...

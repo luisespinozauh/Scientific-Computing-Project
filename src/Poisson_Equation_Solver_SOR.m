@@ -60,7 +60,7 @@ s = chkin(s,{'frequency'});                  % mandatory; frequency is checkpoin
 chkNames = fieldnames(s);    % the full list of variables to checkpoint
 nNames = length(chkNames);   % number of variables in list
         
-%% Iterative Looping- Gauss-Seidel Method
+%% Iterative Looping- SOR
 
 tic;        % Timer to evaluate Performance
 

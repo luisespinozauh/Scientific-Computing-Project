@@ -13,8 +13,9 @@ a_y=0;
 b_x= (2*pi);  
 b_y= (2*pi);
 
-Nx=50;    % Number of nodes in x-direction
-Ny=50;    % Number of nodes in y-direction
+N=10;    % Number of Grid Points, change for grid convergence study  
+Nx=N;    % Number of nodes in x-direction
+Ny=N;    % Number of nodes in y-direction
 tol=1e-06;   % Tolerance
 err= 1;      % Error
 iter=0;      % Iteration counter

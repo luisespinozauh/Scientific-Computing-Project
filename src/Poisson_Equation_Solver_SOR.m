@@ -84,8 +84,10 @@ while max(err(:)) > tol
         for j=2:Ny-1
             u(i,j)=(B.*(1/4)*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j-1)+(h.^2)*F(i,j)))+(1-B)*u(i,j); % Discretizatized Poisson Equation
         end
+        u(i,Nx)=(B.*(1/4)*(u(i+1,j)+u(i+1,j)+u(i,j+1)+u(i,j-1)+(h.^2)*F(i,j)))+(1-B)*u(i,j);    % Neumann Boundary Condition
     end
-    
+    u(N,N)=0;
+    u(1,N)=0;
     unew=u;
     err=abs((uold-unew)./unew);     % Equation for relative error. We only consider the maximum error of all interior nodes
     fprintf(1, 'Completed iteration %d\n', iter);

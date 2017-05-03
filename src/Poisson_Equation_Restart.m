@@ -31,8 +31,8 @@ while max(err(:)) > tol
     for i=2:Nx-1        % Gauss-Seidel Method will only be performed on interior nodes
         for j=2:Ny-1
             u(i,j)=0.25*(u(i+1,j)+ u(i-1,j)+ u(i,j+1)+ u(i,j-1)+ (F(i,j)*(h^2))); % Discretizatized Poisson Equation
-        
         end
+        u(i,Nx)=0.25*(u(i+1,j)+ u(i+1,j)+ u(i,j+1)+ u(i,j-1)+ (F(i,j)*(h^2)));     % Neumann Boundary Condition
     end
     
     unew=u;

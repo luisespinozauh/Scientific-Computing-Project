@@ -33,7 +33,7 @@ u=zeros(Nx,Ny);                       % Initial guess for Gauss-Seidel
 u(Nx,:)=x.*((2*pi)-x).^2;             % Given Boundary Conditions (3 Dirichlet and 1 Neumann)
 u(1,:)=(((2*pi)-x).^2).*cos(x/2);     % Optimized code by using vectorization instead of for loop
 u(:,1)=(4*pi*pi)-((2*pi).*y);           
-u(:,Ny)=b_x;                             
+                            
 
 F=sin(x/(2*pi))'*cos((y+pi)/2);       % Forcing function, optimization- instead of using a for loop
 
@@ -81,8 +81,8 @@ while max(err(:)) > tol
     for i=2:Nx-1        % Gauss-Seidel Method will only be performed on interior nodes
         for j=2:Ny-1
             u(i,j)=0.25*(u(i+1,j)+ u(i-1,j)+ u(i,j+1)+ u(i,j-1)+ (F(i,j)*(h^2))); % Discretizatized Poisson Equation
-        
         end
+        u(i,Nx)=0.25*(u(i+1,j)+ u(i+1,j)+ u(i,j+1)+ u(i,j-1)+ (F(i,j)*(h^2)));     % Neumann Boundary Condition
     end
     
     unew=u;

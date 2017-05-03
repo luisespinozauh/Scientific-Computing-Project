@@ -19,6 +19,7 @@ Ny=N;    % Number of nodes in y-direction
 tol=1e-06;   % Tolerance
 err= 1;      % Error
 iter=0;      % Iteration counter
+frequency=10; % how often to perform checkpointing (intermediate save)
 
 x=linspace(a_x, b_x, Nx);   % Mesh
 y=linspace(a_y, b_y, Ny);
@@ -35,6 +36,22 @@ u(:,Ny)=b_x;
 
 F=sin(x/(2*pi))'*cos((y+pi)/2);      % Forcing function, optimization- instead of using a for loop
 
+%% Checkpoint
+
+% Before the start of the iteration loop, "check-in" each variable
+% that should be checkpointed in the event of restarting the job
+
+matfile = 'PoissonEquationSolution.mat';     % mandatory; name of checkpoint mat-file
+s = struct();               % mandatory; create struct for checkpointing
+s = chkin(s,{'iter'});      % mandatory; iter is iteration loop index
+s = chkin(s,{'frequency'}); % mandatory; frequency is checkpointing period 
+                            % i.e., how often to perform a save
+
+% continue until all variables are checked in. Note that you are only
+% checking in the variables, they don't need to have been already defined
+
+chkNames = fieldnames(s);    % the full list of variables to checkpoint
+nNames = length(chkNames);   % number of variables in list
 
 %% Iterative Looping- Gauss-Seidel Method
 
@@ -42,8 +59,19 @@ tic;        % Timer to evaluate Performance
 
 while max(err(:)) > tol
     iter= iter + 1;
+    %pause(1);       % To test the restart script  
+    
+    % Checkpoints periodically (determined by the determined frequency)
+    if mod(iter, frequency) == 0
+        chkpt   % performs checkpointing (save) every *frequency* iterations
+        fprintf(1, ['Checkpointing frequency is every %2d iterations.' ...
+          'Data updated at iteration %3d\n'], ...
+          frequency, iter);  % Confirm after each checkpointing event
+      
+    end
     
     uold=u;
+    
     for i=2:Nx-1
         for j=2:Ny-1
             u(i,j)=0.25*(u(i+1,j)+ u(i-1,j)+ u(i,j+1)+ u(i,j-1)+ (F(i,j)*(h^2)));
@@ -53,7 +81,7 @@ while max(err(:)) > tol
     
     unew=u;
     err=abs((uold-unew)./unew);     % Equation for relative error. We only consider the maximum error
-    
+    fprintf(1, 'Completed iteration %d\n', iter);
 end
 
 timedoc=toc;

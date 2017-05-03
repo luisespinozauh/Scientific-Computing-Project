@@ -5,7 +5,7 @@
 
 clc
 clear all
-
+close all
 %% Define dimension of 2-D grid
 
 a_x=0;   % Domain and Range

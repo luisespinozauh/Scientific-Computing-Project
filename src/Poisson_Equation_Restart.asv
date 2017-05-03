@@ -8,37 +8,42 @@
 %% Any information defined in original code that has not been checkpointed should be placed here.
 
 
-%% Restarting
+%% Restart
 matfile = 'PoissonEquationSolution';   % should match that in test_checkpoint.m
 load(matfile);        % retrieve data from matfile
 iter1 = iter+1;       % iter is the last time test_checkpoint issued
                       % a save; we start computing on the next step
-
-%% Iterative Looping- Gauss-Seidel Method                      
-
+%===============================================================
 while max(err(:)) > tol
     iter= iter + 1;
-
-    if mod(iter, frequency) == 0 % If statement, checkpoints periodically (determined by the frequency)
-        chkpt                    % chkpt script performs checkpointing (save) every *frequency* iterations
+     
+            
+    % Checkpoints periodically (determined by the determined frequency)
+    if mod(iter, frequency) == 0
+        chkpt   % performs checkpointing (save) every *frequency* iterations
         fprintf(1, ['Checkpointing frequency is every %2d iterations.' ...
           'Data updated at iteration %3d\n'], ...
-          frequency, iter);      % Confirm after each checkpointing event 
+          frequency, iter);  % Confirm after each checkpointing event
+      
     end
     
     uold=u;
     
-    for i=2:Nx-1        % Gauss-Seidel Method will only be performed on interior nodes
+    for i=2:Nx-1
         for j=2:Ny-1
-            u(i,j)=0.25*(u(i+1,j)+ u(i-1,j)+ u(i,j+1)+ u(i,j-1)+ (F(i,j)*(h^2))); % Discretizatized Poisson Equation
+            u(i,j)=0.25*(u(i+1,j)+ u(i-1,j)+ u(i,j+1)+ u(i,j-1)+ (F(i,j)*(h^2)));
         
         end
     end
     
     unew=u;
-    err=abs((uold-unew)./unew);     % Equation for relative error. We only consider the maximum error of all interior nodes
+    err=abs((uold-unew)./unew);     % Equation for relative error. We only consider the maximum error
     fprintf(1, 'Completed iteration %d\n', iter);
 end
+
+timedoc2=toc;
+fprintf('Number of iterations is %f.\n',iter)
+fprintf('Running Time is %f seconds.\n',timedoc2)
 
 %% Plot the results
 

@@ -11,5 +11,5 @@ The following repository is for Luis' project.
 
 -project/bin/ (Contains any executables I planned on including which is none)
 
--project/test/ (Contains all my test files before I had a succesfully running code)
+-project/test/ (Contains all my plots since I have no test cases)
 

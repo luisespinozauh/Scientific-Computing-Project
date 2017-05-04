@@ -1,4 +1,4 @@
-% Luis Espinoza
+% Luis Espinoza, 1226327
 % Restart Script for SOR Method after a system crash
 % Sometimes files take a long time to run to completion. As a result, sometimes they crash due to a variety of reasons: power failure, walltime limit, scheduled shutdown, etc. 
 % Checkpoint/Restarting has long been a common technique to tackle this issue. Checkpointing/Restarting essentially means saving data to disk periodically so that, if need be, 

@@ -100,12 +100,11 @@ fprintf('Running Time is %f seconds.\n',timedoc)
 %% Plot the results
 
 figure
-contourf(u)                    % Contour Plot
+contourf(x,y,u)                    % Contour Plot
 h=gca; 
 get(h,'FontSize') ;
 set(h,'FontSize',12);
 colorbar('location','eastoutside','fontsize',12);
-axis([1 Nx 1 Ny]);
 xlabel('X (Number of Nodes in X-direction)','fontSize',12);
 ylabel('Y (Number of Nodes in Y-direction)','fontSize',12);
 title('Numerical Solution to Poisson Equation, u(x,y)','fontsize',12);

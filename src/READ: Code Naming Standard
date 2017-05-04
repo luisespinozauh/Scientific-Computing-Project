@@ -1,7 +1,0 @@
--The Poisson_Equation_Solver.m is the script file that uses Gauss-Seidel method to solve the Poisson Equation
--The Poisson_Equation_Restart.m is the restarting script file for the script above
-
--The Poisson_Equation_Solver_SOR.m is the script file that uses Succesive Over-Relaxation method to solve the Poisson Equation
--The Poisson_Equation_Restart_SOR.m is the restarting script file for the script above
-
--chkin.m and chkpt.m are a script and a function file employed for checkpointing and restarting

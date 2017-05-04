@@ -1,4 +1,4 @@
-% Scientific Computing
+% Scientific Computing Class
 % Luis Espinoza, 1226327
 % Project A - Poisson Equation
 % Poisson Equation Solver using the Gauss- Seidel Method
